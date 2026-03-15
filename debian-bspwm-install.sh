@@ -54,7 +54,7 @@ PACKAGES=(
   xorg xbacklight xbindkeys xvkbd xinput
   build-essential bspwm sxhkd xdotool libnotify-bin
   polybar dunst feh nwg-look
-  network-manager-gnome lxpolkit
+  network-manager-gnome lxpolkit numlockx
   thunar thunar-archive-plugin thunar-volman
   gvfs-backends dialog mtools cifs-utils fd-find unzip
   pavucontrol pulsemixer pamixer pipewire-audio
