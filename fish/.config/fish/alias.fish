@@ -94,10 +94,10 @@ alias tofish="sudo chsh $USER -s /usr/bin/fish && echo 'Now log out.'"
 alias upgrub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
 alias ff='fastfetch'
-alias ffm='fastfetch -c ~/.dotfiles/fastfetch/.config/fastfetch/hw-config.jsonc'
-alias ffn='fastfetch -l none -c ~/.dotfiles/fastfetch/.config/fastfetch/no-logo-config.jsonc'
-alias ffo='fastfetch -c ~/.dotfiles/fastfetch/.config/fastfetch/omarchy-config.jsonc'
-alias ffs='fastfetch -l small -c ~/.dotfiles/fastfetch/.config/fastfetch/omarchy-small-config.jsonc'
+alias ffm='fastfetch -c ~/.dotbspwm/fastfetch/.config/fastfetch/hw-config.jsonc'
+alias ffn='fastfetch -l none -c ~/.dotbspwm/fastfetch/.config/fastfetch/no-logo-config.jsonc'
+alias ffo='fastfetch -c ~/.dotbspwm/fastfetch/.config/fastfetch/omarchy-config.jsonc'
+alias ffs='fastfetch -l small -c ~/.dotbspwm/fastfetch/.config/fastfetch/omarchy-small-config.jsonc'
 
 alias po='systemctl poweroff'
 alias rb='systemctl reboot'
@@ -136,7 +136,7 @@ alias hg='history | grep '
 alias wget="wget -c"
 alias app='hyprctl clients'
 alias picker='hyprpicker -an'
-alias bg='nsxiv -t /home/hubert/.dotfiles/backgrounds/.local/share/omarchy/themes/catppuccin/backgrounds/'
+alias bg='nsxiv -t /home/hubert/.dotbspwm/backgrounds/.local/share/omarchy/themes/catppuccin/backgrounds/'
 alias fzf='fzf --preview "batcat --color=always {}"'
 alias nn='~/.local/share/bin/fzf-nn.sh'
 alias fe='~/.local/share/bin/fzf-nvim.sh'
@@ -159,8 +159,8 @@ alias obr='cd ~/Obrazy/ && l'
 alias muz='cd ~/Muzyka/ && l'
 alias pob='cd ~/Pobrane/ && l'
 alias sha='cd ~/Shared/ && l'
-alias dot='cd ~/.dotfiles/ && l'
-alias dotp='cd ~/.dotfiles-prv/ && l'
+alias dot='cd ~/.dotbspwm/ && la'
+alias dotp='cd ~/.dotbspwm-prv/ && l'
 alias con='cd ~/.config && l'
 alias bin='cd ~/.local/share/bin/ && l'
 alias oma='cd ~/.local/share/omarchy/ && l'
@@ -202,7 +202,7 @@ alias mgup='mgs; mga .; mgcom "up"; mgpush'
 alias mgpush='~/Dokumenty/Git/my-git-push.sh'
 alias mgpull='~/Dokumenty/Git/my-git-pull.sh'
 alias mgacp='~/Dokumenty/Git/my-git-acp.sh'
-alias gbf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin'
+alias gbf='/usr/bin/git --git-dir=$HOME/.dotbspwm/ --work-tree=$HOME fetch origin'
 
 # -------------------------
 # DEBIAN

@@ -118,6 +118,7 @@ bin \
 bspwm \
 btop \
 dmrc \
+fastfetch \
 fish \
 fonts \
 geany \
