@@ -114,10 +114,12 @@ info "Running stow..."
 for pkg in \
 bash \
 bat \
+bin \
 bspwm \
 btop \
 dmrc \
 fish \
+fonts \
 geany \
 ghostty \
 gtkrc \
