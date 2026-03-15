@@ -1,0 +1,67 @@
+#!/bin/bash
+# bspwm-tabs - Minimal tab management for bspwm
+
+TABBED="$HOME/.config/bspwm/tabbed/tabbed"
+CLASS="bspwm-tabbed"
+
+is_tab() { [ -n "$1" ] && xprop -id "$1" WM_CLASS 2>/dev/null | grep -q "\"$CLASS\""; }
+
+create() {
+    local xid=$([ -x "$TABBED" ] && "$TABBED" -d -c -n "$CLASS" 2>/dev/null || tabbed -d -c -n "$CLASS" 2>/dev/null)
+    local id=$((xid))
+    [ "$id" -gt 0 ] && { sleep 0.15; bspc node "$id" -f; echo "$id"; }
+}
+
+attach() {
+    [ -z "$1" ] || [ -z "$2" ] || is_tab "$1" && return 1
+    xdotool windowunmap "$1" windowreparent "$1" "$2" windowmap "$1" 2>/dev/null
+    sleep 0.1; bspc node "$2" -f 2>/dev/null
+}
+
+find_tab() {
+    for wid in $(bspc query -N -d focused -n .window); do
+        is_tab "$wid" && echo "$wid" && return
+    done
+}
+
+do_attach() {
+    local f=$(bspc query -N -n focused)
+    [ -z "$f" ] && return
+
+    if is_tab "$f"; then
+        local p=$(bspc query -N -n last.local.window)
+        [ -n "$p" ] && [ "$p" != "$f" ] && ! is_tab "$p" && attach "$p" "$f"
+    else
+        local t=$(find_tab)
+        [ -z "$t" ] && t=$(create)
+        [ -n "$t" ] && { sleep 0.2; attach "$f" "$t"; }
+    fi
+}
+
+do_detach() {
+    local f=$(bspc query -N -n focused) root=$(xwininfo -root | awk '/Window id:/ {print $4}')
+    [ -z "$f" ] && return
+
+    local child parent
+    if is_tab "$f"; then
+        child=$(xwininfo -id "$f" -children 2>/dev/null | awk '/^ +0x/ {print $1; exit}')
+        parent=$f
+    else
+        parent=$(xwininfo -id "$f" -tree 2>/dev/null | awk '/Parent window/ {print $4}')
+        parent=$((parent))
+        is_tab "$parent" && child=$f || return
+    fi
+
+    [ -z "$child" ] && { bspc node "$parent" -c; return; }
+    child=$((child))
+    xdotool windowunmap "$child" windowreparent "$child" "$root" windowmap "$child" 2>/dev/null
+    sleep 0.1; bspc node "$child" -f 2>/dev/null
+    [ $(xwininfo -id "$parent" -children 2>/dev/null | grep -c '^ \+0x') -le 0 ] && bspc node "$parent" -c
+}
+
+case "${1:-attach}" in
+    attach) do_attach ;;
+    detach) do_detach ;;
+    create) create ;;
+    *) echo "Usage: bspwm-tabs {attach|detach|create}"; exit 1 ;;
+esac

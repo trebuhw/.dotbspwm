@@ -92,7 +92,6 @@ backup ~/.Xresources
 # ~/.config
 backup ~/.config/bash
 backup ~/.config/bspwm
-backup ~/.config/scripts
 
 ### DOTFILES DIR
 DOTDIR="$HOME/.dotbspwm"
@@ -125,9 +124,7 @@ gtkrc \
 nsxiv \
 nvim \
 profile \
-scripts \
 tmux \
-vim \
 wallpaper \
 wezterm \
 Xresources \
