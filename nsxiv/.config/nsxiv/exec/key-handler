@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# Example for $XDG_CONFIG_HOME/nsxiv/exec/key-handler
+# Called by nsxiv(1) after the external prefix key (C-x by default) is pressed.
+# The next key combo is passed as its first argument. Passed via stdin are the
+# images to act upon: all marked images, if in thumbnail mode and at least one
+# image has been marked, otherwise the current image. nsxiv(1) will block until
+# the handler terminates. It then checks which images have been modified and
+# reloads them.
+
+rotate() {
+  degree="$1"
+  tr '\n' '\0' | xargs -0 realpath | sort | uniq | while read file; do
+    case "$(file -b -i "$file")" in
+    image/jpeg*) jpegtran -rotate "$degree" -copy all -outfile "$file" "$file" ;;
+    *) mogrify -rotate "$degree" "$file" ;;
+    esac
+  done
+}
+
+case "$1" in
+"C-x")
+  # Kopiowanie ścieżki do schowka jako tekst
+  xclip -in -filter | tr '\n' ' ' | xclip -in -selection clipboard
+  ;;
+"C-c")
+  # Kopiowanie obrazu do schowka jako PNG
+  read file
+  xclip -selection clipboard -target image/png "$file"
+  ;;
+"C-t")
+  # Kopiowanie pliku do katalogu .background i wywołanie skryptu swaybg
+  read file
+  cp "$file" "$HOME/.background"
+  ~/.config/hypr/scripts/swaybg-set-background.sh
+  ;;
+"C-w")
+  # Połączony skrót: odczytaj plik i od razu ustaw jako tapetę
+  read file
+  if [ -n "$file" ] && [ -f "$file" ]; then
+    ln -sf "$file" "$HOME/Obrazy/Wallpaper/!current.png"
+    feh --bg-fill "$HOME/Obrazy/Wallpaper/!current.png" &
+  fi
+  ;;
+"C-e")
+  # Otwieranie informacji EXIF w terminalu
+  read file
+  urxvt -bg "#444" -fg "#eee" -sl 0 -title "$file" -e sh -c "exiv2 pr -q -pa '$file' | less" &
+  ;;
+"C-g")
+  # Otwieranie w GIMP
+  read file
+  gimp "$file" &
+  ;;
+"C-r")
+  # Otwieranie w RawTherapee
+  read file
+  rawtherapee "$file" &
+  ;;
+"C-comma") rotate 270 "$1" ;;
+"C-period") rotate 90 "$1" ;;
+"C-slash") rotate 180 "$1" ;;
+esac

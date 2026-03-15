@@ -1,0 +1,191 @@
+# Launch Browser (Firefox)
+super + b
+	firefox 
+
+# Launch Private Browser (Firefox Incognito Mode)
+super + shift + b
+	firefox -private-window
+
+# Launch Terminal (Ghostty)
+super + Return
+	ghostty
+
+# Launch Rofi Application Menu
+super + space
+   	rofi -show drun -modi drun -line-padding 4 -hide-scrollbar -show-icons -theme ~/.config/bspwm/rofi/config.rasi
+
+# Toggle Scratchpad Terminal
+super + shift + Return
+    ~/.config/bspwm/scripts/scratchpad
+	
+# Show Keybinding Help Script
+super + slash
+  ~/.config/bspwm/scripts/help
+
+# Launch File Manager (Thunar)
+super + f
+	thunar
+
+# Launch Geany (Text Editor)
+super + e
+	geany
+
+# Launch GIMP (Image Editor)
+super + g
+	gimp
+
+# Launch Pulsemixer (Audio Mixer in st)
+super + v
+   ~/.config/bspwm/scripts/scratchpad pulsemixer pulsemixer
+
+# Launch Discord
+super + ctrl + w
+	nsxiv -t ~/Obrazy/Wallpaper
+
+# Launch OBS (Screen Recording/Streaming)
+super + alt + Return
+	ghostty -e tmux
+
+# Set Window State: Floating Mode
+super + shift + space
+	bspc node -t ~floating
+
+# Set Window State: Fullscreen Mode
+super + shift + f
+	bspc node -t fullscreen
+    
+# Toggle monocle/tiled layout
+super + t
+      bspc desktop -l next
+
+# Create tab container or attach window to tabs (bspwm-tabs)
+super + w
+      ~/.config/bspwm/scripts/bspwm-tabs attach
+
+# Detach window from tab container
+super + shift + w
+      ~/.config/bspwm/scripts/bspwm-tabs detach 
+
+# Reload sxhkd (Hotkey Daemon)
+super + Escape
+	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+	
+# Reload bspwm (Window Manager)
+super + shift + r
+	bspc wm -r; notify-send 'bspwm' 'Restarted'
+
+# Quit bspwm (Exit Window Manager)
+super + shift + q
+	bspc quit
+
+# Close Focused Window
+super + q
+	bspc node -c
+	
+# Shutdown or Reboot
+super + x
+	~/.config/bspwm/scripts/power
+
+# Rotate Window 90° Clockwise
+super + i
+    bspc node -R 90
+
+# Rotate Window 90° Counterclockwise
+super + shift + i
+    bspc node -R -90
+
+# Change Focus to Left Window
+super + Left
+	bspc node -f west
+
+# Change Focus to Window Below
+super + Down
+	bspc node -f south
+
+# Change Focus to Window Above
+super + Up
+	bspc node -f north
+
+# Change Focus to Right Window
+super + Right
+	bspc node -f east
+
+# Swap Focused Window with Left Window
+super + shift + Left
+	bspc node -s west
+
+# Swap Focused Window with Window Below
+super + shift + Down
+	bspc node -s south
+
+# Swap Focused Window with Window Above
+super + shift + Up
+	bspc node -s north
+
+# Swap Focused Window with Right Window
+super + shift + Right
+	bspc node -s east
+
+# Switch to Workspace 1-10
+super + {1-9,0}
+	bspc desktop --focus ^{1-9,10}
+
+# Move Focused Window to Workspace 1-10
+super + shift + {1-9,0}
+	bspc node --to-desktop ^{1-9,10}
+
+# Shrink window width both sides
+super + ctrl + Left
+	bspc node -z right -40 0; bspc node -z left -40 0
+
+# Expand window width both sides
+super + ctrl + Right
+	bspc node -z right 40 0; bspc node -z left 40 0
+
+# Resize Window: Expand Down
+super + ctrl + Down
+	bspc node -z top 0 40; bspc node -z bottom 40 0
+
+# Resize Window: Shrink Up
+super + ctrl + Up
+	bspc node -z top 0 -40; bspc node -z bottom -40 0
+
+# Increase Volume (Custom Script)
+super + F12
+    ~/.config/bspwm/scripts/changevolume up
+
+# Decrease Volume (Custom Script)
+super + F11
+	~/.config/bspwm/scripts/changevolume down
+
+# Mute Volume (Custom Script)
+super + F10
+	~/.config/bspwm/scripts/changevolume mute
+
+# Increase Volume (Using pamixer)
+XF86AudioRaiseVolume
+	pamixer -i 2
+
+# Decrease Volume (Using pamixer)
+XF86AudioLowerVolume
+	pamixer -d 2
+
+# Increase Screen Brightness
+XF86MonBrightnessUp
+	xbacklight +10
+
+# Decrease Screen Brightness
+XF86MonBrightnessDown
+	xbacklight -10
+
+# Take a Screenshot (Region Select)
+super + shift + p
+	flameshot gui --path ~/Screenshots/
+
+# Take a Fullscreen Screenshot
+super + p
+	flameshot full --path ~/Screenshots/
+
+# Resize All Windows Equally
+super + equal
+	bspc query -N -d | xargs -I % bspc node % -B

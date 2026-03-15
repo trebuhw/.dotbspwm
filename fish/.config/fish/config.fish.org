@@ -1,0 +1,158 @@
+#!/usr/bin/env fish
+# ~/.config/fish/config.fish
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  PROMPT
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── Session header (once per session) ────────────────────────────────────────
+function fish_greeting
+    # Detect window manager
+    set -l wm "$XDG_CURRENT_DESKTOP"
+    if test -z "$wm"; set wm "$DESKTOP_SESSION"; end
+    if test -z "$wm"
+        for w in dwm i3 sway openbox bspwm xfwm4 kwin mutter herbstluftwm qtile xmonad fluxbox icewm awesome jwm fvwm leftwm spectrwm ratpoison cwm wmii
+            if pgrep -x "$w" &>/dev/null
+                set wm "$w"
+                break
+            end
+        end
+    end
+    if test -z "$wm"; set wm unknown; end
+
+    # OS info
+    set -l os    (grep "^NAME" /etc/os-release 2>/dev/null | cut -d'"' -f2)
+    set -l os_id (grep "^ID="  /etc/os-release 2>/dev/null | cut -d'=' -f2)
+    if test -z "$os";    set os Debian;    end
+    if test -z "$os_id"; set os_id debian; end
+
+    # OS icon (Nerd Font)
+    set -l os_icon (printf '\u2699')  # fallback: gear
+    switch "$os_id"
+        case debian;  set os_icon (printf '\uf306')
+        case ubuntu;  set os_icon (printf '\uf31b')
+        case arch;    set os_icon (printf '\uf303')
+        case fedora;  set os_icon (printf '\uf30a')
+        case manjaro; set os_icon (printf '\uf312')
+    end
+
+    # Kernel — major.minor.patch only
+    set -l kernel_short (uname -r | awk -F'[.-]' '{
+        if ($1 && $2 && $3) print $1"."$2"."$3
+        else if ($1 && $2)  print $1"."$2
+        else                print $1
+    }')
+
+    # Shell info
+    set -l shell_ver (fish --version 2>&1 | grep -oP '[\d.]+' | head -1)
+    if test -z "$shell_ver"; set shell_ver unknown; end
+
+    echo -n "  "
+    set_color 585858;       echo -n "─ "
+    set_color ff00af;       echo -n "$os_icon "
+    set_color --bold white; echo -n "$os"
+    set_color 585858;       echo -n " · "
+    set_color cyan;         echo -n "$kernel_short"
+    set_color 585858;       echo -n " · "
+    set_color yellow;       echo -n "$wm"
+    set_color 585858;       echo -n " · "
+    set_color magenta;      echo -n "fish $shell_ver"
+    set_color 585858;       echo -n " ─"
+    set_color normal
+    echo -e "\n"
+end
+
+# ── Git branch helper ─────────────────────────────────────────────────────────
+function _prompt_git
+    git rev-parse --is-inside-work-tree &>/dev/null; or return
+    set -l branch (git symbolic-ref --short HEAD 2>/dev/null)
+    if test -z "$branch"
+        set branch (git rev-parse --short HEAD 2>/dev/null)
+    end
+    test -n "$branch"; or return
+    set -l dirty ""
+    if git status --porcelain --ignore-submodules=dirty -uno 2>/dev/null | grep -q .
+        set dirty "*"
+    end
+    echo -n " ($branch$dirty)"
+end
+
+# ── Main prompt ───────────────────────────────────────────────────────────────
+function fish_prompt
+    set -l last_status $status
+
+    # Line 1: time  user  [ssh]  at  hostname  in  cwd  (git)
+    set_color brblack;  echo -n (date "+%T")" "
+    set_color brgreen;  echo -n (whoami)
+
+    if test -n "$SSH_CLIENT"
+        echo -n " "
+        set_color brred; echo -n "[ssh]"
+    end
+
+    set_color brwhite;  echo -n " at "
+    set_color bryellow; echo -n (hostname -s)
+    set_color brwhite;  echo -n " in "
+    set_color brblue;   echo -n (prompt_pwd)
+    set_color brcyan;   echo -n (_prompt_git)
+    set_color normal
+    echo ""
+
+    # Line 2: ✔/✘  $
+    if test $last_status -eq 0
+        set_color brgreen; echo -n "✔ "
+    else
+        set_color brred;   echo -n "✘ $last_status "
+    end
+    set_color brcyan; echo -n "\$ "
+    set_color normal
+end
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  ENVIRONMENT
+# ══════════════════════════════════════════════════════════════════════════════
+
+set -gx EDITOR nvim
+set -gx GDK_BACKEND x11
+set -gx MICRO_TRUECOLOR 1
+
+# PATH
+fish_add_path /usr/bin
+fish_add_path /usr/local/share/bin
+fish_add_path ~/.config/hypr/scripts
+fish_add_path ~/.config/suckless/scripts
+fish_add_path ~/.local/bin
+fish_add_path ~/.local/share/bin
+
+# omarchy
+if test -d ~/.local/share/omarchy/bin
+    fish_add_path ~/.local/share/omarchy/bin
+end
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  PLUGINS / TOOLS
+# ══════════════════════════════════════════════════════════════════════════════
+
+# zoxide (j zamiast cd)
+if type -q zoxide
+    zoxide init fish --cmd j | source
+end
+
+# FZF — Catppuccin Mocha
+set -Ux FZF_DEFAULT_OPTS "\
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  ALIASES
+# ══════════════════════════════════════════════════════════════════════════════
+
+if test -f $HOME/.dotfiles/fish/.config/fish/alias.fish
+    source $HOME/.dotfiles/fish/.config/fish/alias.fish
+end
+
+# Clone GitHub repo by SSH — użycie: gcs trebuhw/.dotfiles.git
+function gcs
+    git clone --depth=1 git@github.com:$argv[1]
+end
