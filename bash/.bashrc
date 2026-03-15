@@ -90,5 +90,5 @@ fi
 # ALIASES
 # ============================================================================
 
-source ~/.bspwm/fish/.config/fish/alias.fish
+source ~/.dotbspwm/fish/.config/fish/alias.fish
 

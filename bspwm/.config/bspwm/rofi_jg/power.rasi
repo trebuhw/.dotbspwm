@@ -1,7 +1,7 @@
 * {
-    bg: #1e1e2e;
+    bg: #161616;
     background-color: @bg;
-    font: "JetBrainsMono Nerd Font 12";
+    font: "JetBrainsMono Nerd Font 12";  /* Monospace font for alignment */
 }
 
 configuration {
@@ -15,8 +15,7 @@ window {
     width: 20%;
     transparency: "real";
     orientation: vertical;
-    border: 1px;
-    border-color: #89b4fa;
+    border-color: #4fc3f7;
     border-radius: 0px;
 }
 
@@ -29,14 +28,14 @@ mainbox {
 
 element {
     padding: 4 8;
-    text-color: #cdd6f4;
-    background-color: #1e1e2e;
+    text-color: #F2F4F8;
+    background-color: #161616;
     border-radius: 5px;
 }
 
 element.selected {
-    text-color: #1e1e2e;
-    background-color: #89b4fa;
+    text-color: #ffffff;
+    background-color: #ff8f40;
 }
 
 element-text {
@@ -52,42 +51,42 @@ element-icon {
 }
 
 element.selected.active {
-    background-color: #b4befe;
-    text-color: #1e1e2e;
+    background-color: #161616;
+    text-color: #F2F4F8;
 }
 
 element.alternate.normal {
-    background-color: #1e1e2e;
-    text-color: #cdd6f4;
+    background-color: #161616;
+    text-color: #F2F4F8;
 }
 
 element.alternate.active {
-    background-color: #fab387;
-    text-color: #1e1e2e;
+    background-color: #ff8f40;
+    text-color: #F2F4F8;
 }
 
 element.selected.normal {
-    background-color: #89b4fa;
-    text-color: #1e1e2e;
+    background-color: #539bf5;
+    text-color: #161616;
 }
 
 element.normal.active {
-    background-color: #1e1e2e;
-    text-color: #cdd6f4;
+    background-color: #161616;
+    text-color: #F2F4F8;
 }
 
 element.normal.normal {
-    background-color: #1e1e2e;
-    text-color: #cdd6f4;
+    background-color: #161616;
+    text-color: #F2F4F8;
 }
 
 element.normal.urgent {
-    background-color: #f38ba8;
-    text-color: #1e1e2e;
+    background-color: #f25d78;
+    text-color: #161616;
 }
 
 listview {
-    columns: 1;
+    columns: 1;  /* Show in a single column for better alignment */
     lines: 5;
     padding: 5 0;
     fixed-height: true;
@@ -102,15 +101,13 @@ inputbar {
 }
 
 entry {
-    text-color: #cdd6f4;
+    text-color: #F2F4F8;
     padding: 10 10 0 0;
     margin: 0 -2 0 0;
 }
 
 prompt {
-    text-color: #b4befe;
+    text-color: #78a9ff;
     padding: 10 6 0 10;
     margin: 0 -2 0 0;
 }
-
-

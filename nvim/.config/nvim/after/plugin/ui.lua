@@ -1,5 +1,6 @@
 -- Colorscheme
-vim.cmd.colorscheme("github_dark_default")
+-- vim.cmd.colorscheme("github_dark_default")
+vim.cmd.colorscheme("catppuccin-mocha")
 
 -- Lualine
 local ok, lualine = pcall(require, "lualine")

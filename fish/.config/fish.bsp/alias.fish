@@ -83,54 +83,11 @@ alias locate='locate -b'
 alias jctl='journalctl -p 3 -xb' # błędy systemu
 
 # -------------------------
-# Pacman / AUR (Arch)
-# -------------------------
-alias u='sudo pacman -Syyu && yay'
-alias yu='yay -Syyu'
-
-alias i='sudo pacman -S --needed'
-alias s='pacman -Ss'
-alias y='yay'
-
-alias q='pacman -Q'
-alias qe='pacman -Qe'
-alias qi='pacman -Qei | grep'
-alias qp='pacman -Qqet'
-alias qa='pacman -Qem'
-
-alias r='sudo pacman -Rns'
-alias ro='sudo pacman -Rsn (pacman -Qdtq)'
-
-alias clean='~/.local/share/bin/clean.sh'
-
-# -------------------------
-# Yay / AUR (Arch)
-# -------------------------
-alias y='yay'
-alias yu='yay -Syyu'
-alias yf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:50% | xargs -ro yay -S"
-
-# -------------------------
-# Paru / AUR (Arch)
-# -------------------------
-alias p='paru --bottomup'
-alias pf="paru -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:50% | xargs -ro yay -S"
-
-# -------------------------
-# Snapper
-# -------------------------
-alias sl='sudo snapper list'
-alias sd='sudo snapper -c root delete --sync' # podać nr lub zakres
-alias sc='sudo snapper create --desc' # podać opis
-alias sr='sudo snapper rollback'
-alias sa='sudo btrfs-assistant'
-alias sg='sudo snapper-gui'
-
-# -------------------------
 # Shell / System / power / info
 # -------------------------
 alias tobash="sudo chsh $USER -s /bin/bash && echo 'Now log out.'"
 alias tofish="sudo chsh $USER -s /usr/bin/fish && echo 'Now log out.'"
+alias upgrub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 
 alias ff='fastfetch'
 alias ffm='fastfetch -c ~/.dotfiles/fastfetch/.config/fastfetch/hw-config.jsonc'
@@ -142,12 +99,6 @@ alias po='systemctl poweroff'
 alias rb='systemctl reboot'
 alias rh='hyprctl dispatch exit'
 alias logout='pkill -KILL -u hubert'
-
-alias oi="grep -i installed /var/log/pacman.log | sort "
-alias oiw="$HOME/.local/share/bin/ostatnie-instalacje-wieksze.sh"
-alias oim="$HOME/.local/share/bin/ostatnie-instalacje-mniejsze.sh"
-alias oip="$HOME/.local/share/bin/ostatnie-instalacje-od-do.sh"
-alias oiz="$HOME/.local/share/bin/ostatnie-instalacje-z-dnia.sh"
 
 alias wget="wget -c"
 
@@ -176,15 +127,15 @@ alias dns='systemd-resolve --status' # status DNS
 alias v='nvim'
 alias nv='nvim'
 alias f='yazi'
-alias cat='bat'
-alias bat='bat -l conf -p'
-alias ag="bat ~/.config/fish/alias.fish | sort | grep"
+alias cat='batcat'
+alias bat='batcat -l conf -p'
+alias ag="batcat ~/.config/fish/alias.fish | sort | grep"
 alias hg='history | grep '
 alias wget="wget -c"
 alias app='hyprctl clients'
 alias picker='hyprpicker -an'
 alias bg='nsxiv -t /home/hubert/.dotfiles/backgrounds/.local/share/omarchy/themes/catppuccin/backgrounds/'
-alias fzf='fzf --preview "bat --color=always {}"'
+alias fzf='fzf --preview "batcat --color=always {}"'
 alias nn='~/.local/share/bin/fzf-nn.sh'
 alias fe='~/.local/share/bin/fzf-nvim.sh'
 alias fel='~/.local/share/bin/fzf-nvim.sh $(pwd)/'
@@ -252,8 +203,21 @@ alias mgacp='~/Dokumenty/Git/my-git-acp.sh'
 alias gbf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch origin'
 
 # -------------------------
-# Omarchy
+# DEBIAN
 # -------------------------
-alias ou='omarchy-update'
-alias om='omarchy-migrate'
-alias chw='wl-copy < /dev/null && rm -rf ~/.cache/elephant && killall elephant' # Czyści historię schowka w Omarchy
+# apt
+alias u='sudo apt update && sudo apt upgrade'
+alias fu='sudo apt update && sudo apt upgrade && sudo apt full-upgrade'
+alias i='sudo apt install'
+alias r='sudo apt purge'
+alias c='sudo apt autoremove'
+alias s='sudo apt search'
+alias oidpkg='grep " install " /var/log/dpkg.log'
+alias oiapt="awk '/Start-Date:/ {date=\$2\" \"\$3} /Install:/ {print date, \$2}' /var/log/apt/history.log"
+
+# -------------------------
+# DWM
+# -------------------------
+alias make='rm -r ./config.h && sudo make && sudo make clean install'
+
+# programs

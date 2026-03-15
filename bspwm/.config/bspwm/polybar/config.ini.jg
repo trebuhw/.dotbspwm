@@ -3,14 +3,14 @@
 ;==========================================================
 
 [colors]
-background = #181824
-foreground = #cdd6f4
+background = #0d1117
+foreground = #d0d7de
 ;primary = #D29922
-primary = #cdd6f4
-secondary = #89b4fa
-alert = #f38ba8
+primary = #d0d7de
+secondary = #539bf5
+alert = #D29922
 disabled = #45475a
-border = #181824
+border = #0f2923
 active = #cdd6f4
 ocupied = #9399b2
 

@@ -13,7 +13,7 @@
     padding = 15
     horizontal_padding = 15
     frame_width = 1
-    frame_color = "#89b4fa"        # <-- zmieniono
+    frame_color = "#b3e5fc"
     separator_color = auto
     sort = yes
     idle_threshold = 120
@@ -80,20 +80,20 @@
 [urgency_low]
     background = "#00141d"
     foreground = "#80bfff"
-    frame_color = "#89b4fa"        # <-- zmieniono
+    frame_color = "#539bf5"
     timeout = 10
-    highlight = "#89b4fa"          # <-- dopasowano
+    highlight = "#539bf5"
 
 [urgency_normal]
     background = "#00141d"
     foreground = "#ffffff"
-    frame_color = "#89b4fa"        # <-- zmieniono
+    frame_color = "#b3e5fc"
     timeout = 10
-    highlight = "#89b4fa"          # <-- dopasowano
+    highlight = "#66d9ff"
 
 [urgency_critical]
     background = "#1a0000"
     foreground = "#ffffff"
-    frame_color = "#89b4fa"        # <-- zmieniono
+    frame_color = "#d29922"
     timeout = 30
-    highlight = "#89b4fa"          # <-- dopasowano
+    highlight = "#d29922"

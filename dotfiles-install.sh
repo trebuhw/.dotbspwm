@@ -123,9 +123,11 @@ fonts \
 geany \
 ghostty \
 gtkrc \
+icons \
 nsxiv \
 nvim \
 profile \
+themes\
 tmux \
 wallpaper \
 wezterm \

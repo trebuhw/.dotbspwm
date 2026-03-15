@@ -21,7 +21,8 @@ return {
     "projekt0n/github-nvim-theme",
     "xiyaowong/transparent.nvim",
     "norcalli/nvim-colorizer.lua",
-
+    "catppuccin/nvim",
+    
     -- Editing
     "windwp/nvim-autopairs",
     "gaoDean/autolist.nvim",

@@ -1,7 +1,7 @@
 * {
-    bg: #161616;
+    bg: #1e1e2e;
     background-color: @bg;
-    font: "JetBrainsMono Nerd Font 12";  /* Monospace font for alignment */
+    font: "JetBrainsMono Nerd Font 12";
 }
 
 configuration {
@@ -15,8 +15,9 @@ window {
     width: 45%;
     transparency: "real";
     orientation: vertical;
-    border-color: #4fc3f7;
-    border-radius: 10px;
+    border: 1px;
+    border-color: #89b4fa;
+    border-radius: 0px;
 }
 
 mainbox {
@@ -28,14 +29,14 @@ mainbox {
 
 element {
     padding: 4 8;
-    text-color: #F2F4F8;
-    background-color: #161616;
+    text-color: #cdd6f4;
+    background-color: #1e1e2e;
     border-radius: 5px;
 }
 
 element.selected {
-    text-color: #ffffff;
-    background-color: #ff8f40;
+    text-color: #1e1e2e;
+    background-color: #89b4fa;
 }
 
 element-text {
@@ -51,42 +52,42 @@ element-icon {
 }
 
 element.selected.active {
-    background-color: #161616;
-    text-color: #F2F4F8;
+    background-color: #b4befe;
+    text-color: #1e1e2e;
 }
 
 element.alternate.normal {
-    background-color: #161616;
-    text-color: #F2F4F8;
+    background-color: #1e1e2e;
+    text-color: #cdd6f4;
 }
 
 element.alternate.active {
-    background-color: #ff8f40;
-    text-color: #F2F4F8;
+    background-color: #fab387;
+    text-color: #1e1e2e;
 }
 
 element.selected.normal {
-    background-color: #ff8f40;
-    text-color: #161616;
+    background-color: #89b4fa;
+    text-color: #1e1e2e;
 }
 
 element.normal.active {
-    background-color: #161616;
-    text-color: #F2F4F8;
+    background-color: #1e1e2e;
+    text-color: #cdd6f4;
 }
 
 element.normal.normal {
-    background-color: #161616;
-    text-color: #F2F4F8;
+    background-color: #1e1e2e;
+    text-color: #cdd6f4;
 }
 
 element.normal.urgent {
-    background-color: #f25d78;
-    text-color: #161616;
+    background-color: #f38ba8;
+    text-color: #1e1e2e;
 }
 
 listview {
-    columns: 1;  /* Show in a single column for better alignment */
+    columns: 1;
     lines: 24;
     padding: 8 0;
     fixed-height: true;
@@ -101,13 +102,13 @@ inputbar {
 }
 
 entry {
-    text-color: #f27893;
+    text-color: #cdd6f4;
     padding: 10 10 0 0;
     margin: 0 -2 0 0;
 }
 
 prompt {
-    text-color: #78a9ff;
+    text-color: #89b4fa;
     padding: 10 6 0 10;
     margin: 0 -2 0 0;
 }
