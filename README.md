@@ -1,0 +1,2 @@
+# .dotbspwm
+bspwm dotfiles
