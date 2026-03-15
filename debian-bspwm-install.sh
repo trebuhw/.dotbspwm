@@ -61,7 +61,7 @@ PACKAGES=(
   avahi-daemon acpi acpid xfce4-power-manager flameshot
   qimgv xdg-user-dirs-gtk fonts-font-awesome fonts-terminus
   cmake meson ninja-build curl pkg-config wget git
-  picom rofi stow desktop-base
+  picom rofi stow desktop-base trash-cli rsync
 )
 
 ### INSTALL PACKAGES
