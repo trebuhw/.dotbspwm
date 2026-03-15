@@ -1,10 +1,10 @@
 # Launch Browser (Firefox)
 super + b
-	firefox 
+	chromium 
 
 # Launch Private Browser (Firefox Incognito Mode)
 super + shift + b
-	firefox -private-window
+	chromium -private-window
 
 # Launch Terminal (Ghostty)
 super + Return

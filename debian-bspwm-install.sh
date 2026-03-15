@@ -61,7 +61,7 @@ PACKAGES=(
   avahi-daemon acpi acpid xfce4-power-manager flameshot
   qimgv xdg-user-dirs-gtk fonts-font-awesome fonts-terminus
   cmake meson ninja-build curl pkg-config wget git
-  picom rofi stow desktop-base trash-cli rsync
+  picom rofi stow desktop-base trash-cli rsync chromium
 )
 
 ### INSTALL PACKAGES
@@ -85,19 +85,6 @@ install_browser() {
   else
     sudo apt install -y firefox
   fi
-}
-
-### INSTALL DOTFILES (STOW)
-install_dotfiles() {
-  msg "Linking dotfiles using GNU Stow..."
-  [ -d "$DOTFILES_DIR" ] || err ".dotfiles directory not found"
-  cd "$DOTFILES_DIR"
-  # Stow każdej paczki/directory w .dotfiles
-  for dir in */; do
-    pkg="${dir%/}"
-    msg "Stowing $pkg..."
-    stow -R --target="$HOME" "$pkg"
-  done
 }
 
 ### BUILD TABBED
@@ -183,6 +170,8 @@ if [[ "$ONLY_CONFIG" = false ]]; then
   install_theme
   install_dm
 fi
+
+xdg-user-dirs-update
 
 ### DONE
 echo
