@@ -108,7 +108,7 @@ entry {
 }
 
 prompt {
-    text-color: #b4befe;
+    text-color: #89b4fa;
     padding: 10 6 0 10;
     margin: 0 -2 0 0;
 }

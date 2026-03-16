@@ -1,1 +1,0 @@
-/home/hubert/.config/omarchy/current/theme/neovim.lua
