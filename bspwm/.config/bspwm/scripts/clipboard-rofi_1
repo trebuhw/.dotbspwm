@@ -43,8 +43,7 @@ if [ "$1" == "menu" ]; then
 fi
 
 # Daemon w tle – nasłuchuje obu schowków
-last_clipboard=""
-last_primary=""
+last_clip=""
 mkdir -p "$(dirname "$HISTORY_FILE")"
 touch "$HISTORY_FILE"
 
@@ -52,14 +51,12 @@ while true; do
   clip_clipboard=$(xclip -o -selection clipboard 2>/dev/null)
   clip_primary=$(xclip -o -selection primary 2>/dev/null)
 
-  if [ -n "$clip_clipboard" ] && [ "$clip_clipboard" != "$last_clipboard" ]; then
-    last_clipboard="$clip_clipboard"
-    add_to_history "$clip_clipboard"
-  fi
+  current_clip="$clip_clipboard"
+  [ -z "$current_clip" ] && current_clip="$clip_primary"
 
-  if [ -n "$clip_primary" ] && [ "$clip_primary" != "$last_primary" ]; then
-    last_primary="$clip_primary"
-    add_to_history "$clip_primary"
+  if [ -n "$current_clip" ] && [ "$current_clip" != "$last_clip" ]; then
+    last_clip="$current_clip"
+    add_to_history "$current_clip"
   fi
 
   sleep 0.5

@@ -42,7 +42,9 @@ super + v
 super + ctrl + w
 	nsxiv -t ~/Obrazy/Wallpaper
 
-super + ctrl + c
+
+# Clipboard
+super + shift + s
   bash /home/hubert/.config/bspwm/scripts/clipboard-rofi menu
 
 # Launch OBS (Screen Recording/Streaming)
