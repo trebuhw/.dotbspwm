@@ -12,15 +12,15 @@ super + Return
 
 # Launch Rofi Application Menu
 super + space
-   	rofi -show drun -modi drun -line-padding 4 -hide-scrollbar -show-icons -theme ~/.config/bspwm/rofi/config.rasi
+	rofi -show drun -modi drun -line-padding 4 -hide-scrollbar -show-icons -theme ~/.config/bspwm/rofi/config.rasi
 
 # Toggle Scratchpad Terminal
 super + shift + Return
-    ~/.config/bspwm/scripts/scratchpad
+	~/.config/bspwm/scripts/scratchpad
 	
 # Show Keybinding Help Script
 super + slash
-  ~/.config/bspwm/scripts/help
+	~/.config/bspwm/scripts/help
 
 # Launch File Manager (Thunar)
 super + f
@@ -36,15 +36,14 @@ super + g
 
 # Launch Pulsemixer (Audio Mixer in st)
 super + v
-   ~/.config/bspwm/scripts/scratchpad pulsemixer pulsemixer
+	~/.config/bspwm/scripts/scratchpad pulsemixer pulsemixer
 
 # Launch Discord
 super + ctrl + w
 	nsxiv -t ~/Obrazy/Wallpaper
 
-# Clipboard
-super + shift + z
-~/.config/bspwm/scripts/clipboard-rofi menu
+super + ctrl + c
+  bash /home/hubert/.config/bspwm/scripts/clipboard-rofi menu
 
 # Launch OBS (Screen Recording/Streaming)
 super + alt + Return
@@ -57,18 +56,18 @@ super + shift + space
 # Set Window State: Fullscreen Mode
 super + shift + f
 	bspc node -t fullscreen
-    
+	
 # Toggle monocle/tiled layout
 super + t
-      bspc desktop -l next
+	bspc desktop -l next
 
 # Create tab container or attach window to tabs (bspwm-tabs)
 super + w
-      ~/.config/bspwm/scripts/bspwm-tabs attach
+	~/.config/bspwm/scripts/bspwm-tabs attach
 
 # Detach window from tab container
 super + shift + w
-      ~/.config/bspwm/scripts/bspwm-tabs detach 
+	~/.config/bspwm/scripts/bspwm-tabs detach 
 
 # Reload sxhkd (Hotkey Daemon)
 super + Escape
@@ -92,11 +91,11 @@ super + x
 
 # Rotate Window 90° Clockwise
 super + i
-    bspc node -R 90
+	bspc node -R 90
 
 # Rotate Window 90° Counterclockwise
 super + shift + i
-    bspc node -R -90
+	bspc node -R -90
 
 # Change Focus to Left Window
 super + Left
@@ -156,7 +155,7 @@ super + ctrl + Up
 
 # Increase Volume (Custom Script)
 super + F12
-    ~/.config/bspwm/scripts/changevolume up
+	~/.config/bspwm/scripts/changevolume up
 
 # Decrease Volume (Custom Script)
 super + F11

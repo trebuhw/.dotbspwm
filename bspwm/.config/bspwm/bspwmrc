@@ -47,6 +47,9 @@ lxpolkit &
 ## Numlock - on
 numlockx &
 
+## Clipboard
+/home/hubert/.config/bspwm/scripts/clipboard-rofi &
+
 ## Powiadomienia
 dunst -config ~/.config/bspwm/dunst/dunstrc &
 
