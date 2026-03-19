@@ -24,13 +24,13 @@ echo
 read -rp "Install dotfiles? [y/N]: " answer
 
 case "$answer" in
-    [yY]|[yY][eE][sS])
-        echo -e "${GREEN}Starting installation...${NC}"
-        ;;
-    *)
-        echo -e "${RED}Installation cancelled.${NC}"
-        exit 0
-        ;;
+[yY] | [yY][eE][sS])
+  echo -e "${GREEN}Starting installation...${NC}"
+  ;;
+*)
+  echo -e "${RED}Installation cancelled.${NC}"
+  exit 0
+  ;;
 esac
 
 ### LOG FILE
@@ -46,37 +46,37 @@ echo
 
 ### LOG FUNCTIONS
 info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
+  echo -e "${BLUE}[INFO]${NC} $1"
 }
 
 ok() {
-    echo -e "${GREEN}[OK]${NC} $1"
+  echo -e "${GREEN}[OK]${NC} $1"
 }
 
 warn() {
-    echo -e "${YELLOW}[WARN]${NC} $1"
+  echo -e "${YELLOW}[WARN]${NC} $1"
 }
 
 err() {
-    echo -e "${RED}[ERROR]${NC} $1"
+  echo -e "${RED}[ERROR]${NC} $1"
 }
 
 ### BACKUP FUNCTION
 backup() {
-    local target="$1"
+  local target="$1"
 
-    if [ -e "$target" ]; then
-        local backup="${target}.bak"
+  if [ -e "$target" ]; then
+    local backup="${target}.bak"
 
-        if [ -e "$backup" ]; then
-            backup="${target}.bak.$(date +%s)"
-        fi
-
-        mv "$target" "$backup"
-        ok "Backup: $target -> $backup"
-    else
-        warn "$target not found, skipping"
+    if [ -e "$backup" ]; then
+      backup="${target}.bak.$(date +%s)"
     fi
+
+    mv "$target" "$backup"
+    ok "Backup: $target -> $backup"
+  else
+    warn "$target not found, skipping"
+  fi
 }
 
 info "Creating backups..."
@@ -97,52 +97,50 @@ backup ~/.config/bspwm
 DOTDIR="$HOME/.dotbspwm"
 
 if [ ! -d "$DOTDIR" ]; then
-    err "Directory $DOTDIR does not exist"
-    exit 1
+  err "Directory $DOTDIR does not exist"
+  exit 1
 fi
 
 cd "$DOTDIR"
 
 ### CHECK STOW
 if ! command -v stow >/dev/null 2>&1; then
-    err "stow is not installed"
-    exit 1
+  err "stow is not installed"
+  exit 1
 fi
 
 info "Running stow..."
 
 for pkg in \
-bash \
-bat \
-bin \
-bspwm \
-btop \
-dmrc \
-fastfetch \
-fish \
-fonts \
-geany \
-ghostty \
-gtkrc \
-icons \
-nsxiv \
-nvim \
-profile \
-themes\
-tmux \
-wallpaper \
-wezterm \
-Xresources \
-yazi \
-zathura
-do
-    if [ -d "$pkg" ]; then
-        info "Stowing $pkg"
-        stow "$pkg"
-        ok "$pkg linked"
-    else
-        warn "Package $pkg not found"
-    fi
+  bash \
+  bat \
+  bin \
+  bspwm \
+  btop \
+  dmrc \
+  fastfetch \
+  fish \
+  fonts \
+  geany \
+  ghostty \
+  gtkrc \
+  icons \
+  nsxiv \
+  nvim \
+  profile \
+  themestmux \
+  wallpaper \
+  wezterm \
+  Xresources \
+  yazi \
+  zathura; do
+  if [ -d "$pkg" ]; then
+    info "Stowing $pkg"
+    stow "$pkg"
+    ok "$pkg linked"
+  else
+    warn "Package $pkg not found"
+  fi
 done
 
 echo
