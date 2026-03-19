@@ -42,6 +42,10 @@ super + v
 super + ctrl + w
 	nsxiv -t ~/Obrazy/Wallpaper
 
+# Clipboard
+super + shift + c
+clipboard_manager_all_rofi.sh menu
+
 # Launch OBS (Screen Recording/Streaming)
 super + alt + Return
 	ghostty -e tmux
