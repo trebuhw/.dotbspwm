@@ -12,12 +12,30 @@ while true; do
 done 2>/dev/null &
 
 # -------------------------------------------------------
+# Fedora: update
+# -------------------------------------------------------
+sudo dnf update
+sudo dnf upgrade
+
+# -------------------------------------------------------
 # Fedora: włącz RPM Fusion (potrzebne m.in. do chromium)
 # -------------------------------------------------------
 echo "==> Enabling RPM Fusion repositories..."
 sudo dnf install -y \
   "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm" \
   "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
+# -------------------------------------------------------
+# Fedora: Dodaj Copr (potrzebne m.in. do ghostty, yazi)
+# -------------------------------------------------------
+# yazi
+sudo dnf copr enable lihaohong/yazi
+# ghostty
+dnf copr enable scottames/ghostty
+# starship
+dnf copr enable atim/starship
+
+sudo dnf update
 
 # -------------------------------------------------------
 # Bazowe narzędzia developerskie (odpowiednik base-devel)
@@ -47,11 +65,11 @@ sudo dnf install -y \
 echo "==> Installing X11..."
 # xorg-x11-server-Xorg  — serwer X, główny wymóg bspwm
 # xorg-x11-xinit        — dostarcza startx i szkielet /etc/X11/xinit/
-# xorg-x11-server-utils — dostarcza xsetroot i xrandr
 sudo dnf install -y \
   xorg-x11-server-Xorg \
   xorg-x11-xinit \
-  xorg-x11-server-utils
+  xrandr \
+  xsetroot
 
 # -------------------------------------------------------
 # Główna lista pakietów
@@ -60,6 +78,7 @@ echo "==> Installing packages..."
 sudo dnf install -y \
   bat \
   btop \
+  bspwm \
   chromium \
   dunst \
   eza \
@@ -79,7 +98,6 @@ sudo dnf install -y \
   starship \
   stow \
   sxhkd \
-  bspwm \
   thunar \
   thunar-archive-plugin \
   thunar-volman \
@@ -97,36 +115,6 @@ sudo dnf install -y \
   zathura \
   zathura-pdf-poppler \
   zoxide
-
-# Uwaga: eza może być orphaned na Fedorze 42+.
-# Jeśli instalacja się nie powiodła, zainstaluj ją ręcznie:
-#   EZA_VER=$(curl -s https://api.github.com/repos/eza-community/eza/releases/latest | grep tag_name | cut -d '"' -f4)
-#   curl -Lo /tmp/eza.tar.gz "https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz"
-#   tar -xf /tmp/eza.tar.gz -C /tmp && sudo mv /tmp/eza /usr/local/bin/
-
-# -------------------------------------------------------
-# COPR: pakiety niedostępne w oficjalnych repozytoriach
-# -------------------------------------------------------
-
-# ghostty — terminal emulator
-echo "==> Installing ghostty (via COPR)..."
-sudo dnf copr enable -y pgdev/ghostty
-sudo dnf install -y ghostty
-
-# nsxiv — image viewer
-echo "==> Installing nsxiv (via COPR)..."
-sudo dnf copr enable -y mamg22/nsxiv
-sudo dnf install -y nsxiv
-
-# nwg-look — GTK theme manager
-echo "==> Installing nwg-look (via COPR)..."
-sudo dnf copr enable -y tofik/nwg-shell
-sudo dnf install -y nwg-look
-
-# pulsemixer — brak w oficjalnych repo ani w COPR, instalacja przez pip
-echo "==> Installing pulsemixer (via pip)..."
-pip3 install --user pulsemixer
-# lub zainstaluj globalnie: sudo pip3 install pulsemixer
 
 # -------------------------------------------------------
 # XDG dirs
@@ -165,8 +153,8 @@ fi
 echo "==> Copy TLP config..."
 sudo cp ~/.dotbspwm/etc/.config/tlp.conf /etc/tlp.conf
 
-echo "==> Enable & Start TLP..."
-sudo systemctl enable --now tlp
+#echo "==> Enable & Start TLP..."
+#sudo systemctl enable --now tlp
 
 # -------------------------------------------------------
 # Zmiana powłoki na fish
