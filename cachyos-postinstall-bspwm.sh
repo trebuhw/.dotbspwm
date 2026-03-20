@@ -24,7 +24,7 @@ makepkg -si --noconfirm
 
 echo "==> Installing packages..."
 sudo pacman -S --needed --noconfirm \
-  bat btop chromium dunst eza fastfetch feh fish geany geany-plugins \
+  bat btop chromium dunst eza fastfetch feh firefox fish geany geany-plugins \
   ghostty git gvfs lm-sensors neovim nsxiv numlockx nwg-look polybar pulsemixer \
   rofi starship stow sxhkd thunar thunar-archive-plugin thunar-volman tlp \
   tmux trash-cli tree tumbler unzip vim xarchiver xclip xdg-user-dirs \
