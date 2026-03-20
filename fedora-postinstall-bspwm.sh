@@ -101,6 +101,7 @@ sudo dnf install -y \
   thunar \
   thunar-archive-plugin \
   thunar-volman \
+  tldr \
   tlp \
   tmux \
   trash-cli \
