@@ -2,17 +2,8 @@
 
 set -euo pipefail
 
-# === Jednorazowe sudo — odświeżaj token co 60s w tle ===
-echo "==> Podaj hasło sudo (jednorazowo)..."
-sudo -v
-while true; do
-  sudo -n true
-  sleep 60
-  kill -0 "$$" || exit
-done 2>/dev/null &
-
 echo "==> Installing base dependencies..."
-sudo pacman -S --needed --noconfirm base-devel git
+sudo pacman -S --needed base-devel git
 
 echo "==> Installing yay (AUR helper)..."
 if [ ! -d "$HOME/yay-bin" ]; then
@@ -23,7 +14,7 @@ cd "$HOME/yay-bin"
 makepkg -si --noconfirm
 
 echo "==> Installing packages..."
-sudo pacman -S --needed --noconfirm \
+sudo pacman -S --needed \
   bat btop chromium dunst eza fastfetch feh fish geany geany-plugins \
   ghostty git gvfs neovim nsxiv numlockx nwg-look pulsemixer rofi starship stow sxhkd \
   thunar thunar-archive-plugin thunar-volman tlp tmux trash-cli tree tumbler vim \
@@ -52,6 +43,6 @@ else
 fi
 
 echo "==> Change shell to fish..."
-sudo chsh "$USER" -s /usr/bin/fish && echo "Now log out"
+sudo chsh $USER -s /usr/bin/fish && echo "Now log out"
 
 echo "==> Done, restart PC!"
