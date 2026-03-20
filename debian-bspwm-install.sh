@@ -57,7 +57,7 @@ PACKAGES=(
   network-manager-gnome lxpolkit numlockx
   thunar thunar-archive-plugin thunar-volman
   gvfs-backends dialog mtools cifs-utils fd-find unzip
-  pavucontrol pulsemixer pamixer pipewire-audio
+  pavucontrol pulsemixer pamixer picom pipewire-audio
   avahi-daemon acpi acpid xfce4-power-manager flameshot
   qimgv xdg-user-dirs-gtk fonts-font-awesome fonts-terminus
   cmake meson ninja-build curl pkg-config wget git

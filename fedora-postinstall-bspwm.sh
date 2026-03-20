@@ -93,6 +93,7 @@ sudo dnf install -y \
   lm_sensors \
   neovim \
   numlockx \
+  picom \
   polybar \
   rofi \
   starship \
