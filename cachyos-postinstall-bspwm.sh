@@ -18,7 +18,7 @@ sudo pacman -S --needed \
   bat btop chromium dunst eza fastfetch feh fish geany geany-plugins \
   ghostty git gvfs neovim nsxiv numlockx nwg-look pulsemixer rofi starship stow sxhkd \
   thunar thunar-archive-plugin thunar-volman tmux trash-cli tree tumbler vim \
-  xclip xorg-xsetroot yazi zathura zoxide
+  xclip xdg-user-dirs xorg-xrandr xorg-xsetroot yazi zathura zoxide
 
 echo "==> Updating XDG user dirs..."
 xdg-user-dirs-update
@@ -42,4 +42,6 @@ else
   echo "!! tabbed directory not found, skipping"
 fi
 
-echo "==> Done!"
+sudo chsh $USER -s /usr/bin/fish && echo "Now log out"
+
+echo "==> Done, restart PC!"
