@@ -52,6 +52,12 @@ else
   echo "!! tabbed directory not found, skipping"
 fi
 
+echo "==> Copy TLP config..."
+sudo cp ~/.dotbspwm/etc/.config/tlp.conf /etc/tlp.conf
+
+echo "==> Enable & Start TLP config..."
+sudo systemctl enable --now tlp
+
 echo "==> Change shell to fish..."
 sudo chsh "$USER" -s /usr/bin/fish && echo "Now log out"
 
