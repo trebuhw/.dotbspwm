@@ -1,4 +1,4 @@
-# Launch Browser (Firefox)
+# Launch Browser (Chromium)
 super + b
 	chromium 
 
