@@ -143,35 +143,35 @@ echo "==> Installing yazi..."
 
 # Funkcja do instalacji paczki .deb
 install_yazi_deb() {
-    # Pobierz najnowszą wersję z GitHub
-    LATEST_URL=$(curl -s https://api.github.com/repos/sxyazi/yazi/releases/latest \
-        | jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url')
+  # Pobierz najnowszą wersję z GitHub
+  LATEST_URL=$(curl -s https://api.github.com/repos/sxyazi/yazi/releases/latest |
+    jq -r '.assets[] | select(.name | endswith(".deb")) | .browser_download_url')
 
-    if [ -z "$LATEST_URL" ]; then
-        echo "!! Nie udało się znaleźć najnowszej paczki yazi .deb"
-        return 1
-    fi
+  if [ -z "$LATEST_URL" ]; then
+    echo "!! Nie udało się znaleźć najnowszej paczki yazi .deb"
+    return 1
+  fi
 
-    echo "==> Pobieranie $LATEST_URL..."
-    TMP_DEB=$(mktemp --suffix=.deb)
-    curl -L "$LATEST_URL" -o "$TMP_DEB"
+  echo "==> Pobieranie $LATEST_URL..."
+  TMP_DEB=$(mktemp --suffix=.deb)
+  curl -L "$LATEST_URL" -o "$TMP_DEB"
 
-    echo "==> Instalacja yazi..."
-    sudo dpkg -i "$TMP_DEB" || sudo apt -f install -y
+  echo "==> Instalacja yazi..."
+  sudo dpkg -i "$TMP_DEB" || sudo apt -f install -y
 
-    rm -f "$TMP_DEB"
+  rm -f "$TMP_DEB"
 }
 
 # Sprawdź, czy yazi jest zainstalowane
 if ! command -v yazi >/dev/null 2>&1; then
-    echo "!! yazi nie znaleziono — instalacja najnowszej wersji .deb"
-    # Zainstaluj zależności potrzebne do działania yazi
-    sudo apt update
-    sudo apt install -y ffmpeg p7zip-full jq poppler-utils fd-find ripgrep fzf imagemagick curl
+  echo "!! yazi nie znaleziono — instalacja najnowszej wersji .deb"
+  # Zainstaluj zależności potrzebne do działania yazi
+  sudo apt update
+  sudo apt install -y ffmpeg p7zip-full jq poppler-utils fd-find ripgrep fzf imagemagick curl
 
-    install_yazi_deb
+  install_yazi_deb
 else
-    echo "==> yazi już zainstalowane"
+  echo "==> yazi już zainstalowane"
 fi
 
 # ---------------------------------------------------------------------------
