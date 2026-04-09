@@ -26,9 +26,9 @@ echo "==> Installing packages..."
 sudo pacman -S --needed --noconfirm \
   bat btop bspwm chromium dunst eza fastfetch feh firefox fish geany geany-plugins \
   ghostty git gvfs lm_sensors neovim nsxiv numlockx nwg-look picom polybar pulsemixer \
-  rofi starship stow sxhkd thunar thunar-archive-plugin thunar-volman tlp \
-  tmux trash-cli tree tumbler unzip vim xarchiver xclip xdg-user-dirs \
-  xorg-xrandr xorg xorg-xsetroot yazi zathura zoxide
+  rofi sddm starship stow sxhkd thunar thunar-archive-plugin thunar-volman tlp \
+  tmux trash-cli tree tumbler qt5-quickcontrols2 qt5-graphicaleffects qt5-svg unzip \
+  vim xarchiver xclip xdg-user-dirs xorg-xrandr xorg xorg-xsetroot yazi zathura zoxide
 
 echo "==> Updating XDG user dirs..."
 xdg-user-dirs-update
@@ -57,6 +57,14 @@ sudo cp ~/.dotbspwm/etc/.config/tlp.conf /etc/tlp.conf
 
 echo "==> Enable & Start TLP config..."
 sudo systemctl enable --now tlp
+
+echo "==> Copy SDDM config..."
+sudo mkdir /etc/sddm.conf.d
+sudo cp -r ~/.dotbspwm/etc/.config/sddm.conf.d /etc/sddm.conf.d
+sudo cp -r ~/.dotbspwm/usr/.config/usr/share/sddm/simple-sddm /usr/share/sddm/siple-sddm
+
+echo "==> Enable & Start SDDM config..."
+sudo systemctl enable sddm
 
 echo "==> Change shell to fish..."
 sudo chsh "$USER" -s /usr/bin/fish && echo "Now log out"
