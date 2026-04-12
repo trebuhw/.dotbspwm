@@ -15,7 +15,7 @@
   # =========================================================
   # Sieć
   # =========================================================
-  networking.hostName = "archos"; # zmień wg potrzeb
+  networking.hostName = "nixos"; # zmień wg potrzeb
   networking.networkmanager.enable = true;
 
   # =========================================================
@@ -89,9 +89,9 @@
   # =========================================================
   # Użytkownik — ZMIEŃ "archos" na swój login
   # =========================================================
-  users.users.archos = {
+  users.users.hubert = {
     isNormalUser = true;
-    description  = "Archos";
+    description  = "Hubert";
     extraGroups  = [ "networkmanager" "wheel" "audio" "video" ];
     shell        = pkgs.fish;  # domyślna powłoka = fish
   };
@@ -135,11 +135,11 @@
     nsxiv
 
     # ----- pliki / menedżer -----
-    thunar
+    xfce.thunar
     xfce.thunar-archive-plugin
     xfce.thunar-volman
     gvfs
-    tumbler
+    xfce.tumbler
     xarchiver
     trash-cli
     tree
@@ -191,17 +191,18 @@
   # Czcionki
   # =========================================================
   fonts = {
-    enableDefaultPackages = true;
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "FiraCode" ]; })
-    ];
-    fontconfig.defaultFonts = {
-      monospace = [ "JetBrainsMono Nerd Font" ];
-      sansSerif = [ "Noto Sans" ];
-      serif     = [ "Noto Serif" ];
+  enableDefaultPackages = true;
+  packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+   ];
+  fontconfig.defaultFonts = {
+    monospace = [ "JetBrainsMono Nerd Font" ];
+    sansSerif = [ "Noto Sans" ];
+    serif     = [ "Noto Serif" ];
     };
   };
 
@@ -227,5 +228,5 @@
   # =========================================================
   # Wersja stanu konfiguracji NixOS – NIE ZMIENIAJ
   # =========================================================
-  system.stateVersion = "24.11"; # dostosuj do swojej instalacji
+  system.stateVersion = "25.11"; # dostosuj do swojej instalacji
 }
