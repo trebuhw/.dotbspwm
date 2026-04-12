@@ -22,7 +22,21 @@
   # Lokalizacja i strefa czasowa
   # =========================================================
   time.timeZone = "Europe/Warsaw";
+
   i18n.defaultLocale = "pl_PL.UTF-8";
+  i18n.supportedLocales = [ "pl_PL.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS        = "pl_PL.UTF-8";
+    LC_IDENTIFICATION = "pl_PL.UTF-8";
+    LC_MEASUREMENT    = "pl_PL.UTF-8";
+    LC_MONETARY       = "pl_PL.UTF-8";
+    LC_NAME           = "pl_PL.UTF-8";
+    LC_NUMERIC        = "pl_PL.UTF-8";
+    LC_PAPER          = "pl_PL.UTF-8";
+    LC_TELEPHONE      = "pl_PL.UTF-8";
+    LC_TIME           = "pl_PL.UTF-8";
+  };
+
   console = {
     font   = "Lat2-Terminus16";
     keyMap = "pl";
@@ -105,7 +119,11 @@
   # Pakiety systemowe
   # Odpowiedniki paczek z pacman / AUR
   # =========================================================
-  environment.systemPackages = with pkgs; [
+  environment.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "bspwm";
+  };
+ 
+ environment.systemPackages = with pkgs; [
 
     # ----- terminale / shell -----
     ghostty
@@ -125,7 +143,6 @@
     chromium
 
     # ----- WM / compositor / bar -----
-    bspwm
     sxhkd
     picom
     polybar
@@ -149,6 +166,8 @@
     bat
     btop
     eza
+    gcc
+    gnumake
     fastfetch
     lm_sensors
     numlockx
