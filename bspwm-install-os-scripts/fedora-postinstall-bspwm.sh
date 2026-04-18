@@ -88,6 +88,7 @@ sudo dnf install -y \
   geany \
   geany-plugins-common \
   git \
+  gthumb \
   gvfs \
   lm_sensors \
   neovim \

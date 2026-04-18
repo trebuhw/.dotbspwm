@@ -42,7 +42,7 @@ fi
 echo "==> Installing packages..."
 zypper_in \
   bat btop chromium dunst eza fastfetch feh firefox fish geany geany-plugins \
-  git gvfs lm_sensors neovim numlockx picom polybar pulsemixer \
+  git gthumb gvfs lm_sensors neovim numlockx picom polybar pulsemixer \
   rofi starship stow sxhkd thunar thunar-plugin-archive thunar-plugin-volman \
   tlp tmux trash-cli tree tumbler unzip vim xarchiver xclip \
   xdg-user-dirs xrandr xsetroot yazi zathura zoxide

@@ -36,7 +36,7 @@ apt_in build-essential git curl wget ca-certificates gpg
 echo "==> Installing packages..."
 apt_in \
   bat btop chromium dunst feh firefox-esr fish geany geany-plugins \
-  git gvfs lm-sensors neovim numlockx picom polybar pulsemixer \
+  git gthumb gvfs lm-sensors neovim numlockx picom polybar pulsemixer \
   rofi stow sxhkd thunar thunar-archive-plugin thunar-volman \
   tlp tmux trash-cli tree tumbler unzip vim xarchiver xclip \
   xdg-user-dirs x11-xserver-utils xorg zathura zoxide
